@@ -22,15 +22,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.springframework.pulsar:spring-pulsar:${springPulsarVersion}"
-    implementation "org.springframework.pulsar:spring-pulsar-cache-provider:${springPulsarVersion}"
     implementation 'org.projectlombok:lombok'
-    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
-    
-    // OpenTelemetry dependencies
-    implementation 'io.opentelemetry:opentelemetry-api:1.32.0'
-    implementation 'io.opentelemetry:opentelemetry-sdk:1.32.0'
-    implementation 'io.opentelemetry:opentelemetry-exporter-logging:1.32.0'
-    
+
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
