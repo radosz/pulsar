@@ -31,7 +31,7 @@ public class StockProducer {
             executorService.submit(() -> {
                 try {
                     final StockData stockData = stockDataGenerator.generateStockData(ticker);
-                    pulsarTemplate.send(topicName, stockData);
+                    pulsarTemplate.sendAsync(topicName, stockData);
                     log.info("Published data for ticker: {}", stockData);
                 } catch (Exception e) {
                     log.error("Error publishing data for ticker {}: {}", ticker, e.getMessage(), e);
