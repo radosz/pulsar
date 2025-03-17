@@ -1,0 +1,44 @@
+server:
+  port: 9080
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+spring:
+  pulsar:
+    client:
+      service-url: "pulsar://localhost:6650"
+      operation-timeout: 30s
+      io-threads: 1
+      listener-threads: 1
+      connections-per-broker: 1
+    producer:
+      name: producer1
+      topic-name: "persistent://public/default/stock-topic-json"
+      send-timeout: 10s
+      batching-enabled: true
+      batching-max-messages: 1000
+      message-type: com.example.pulsar.dto.StockData
+      schema-type: JSON
+    consumer:
+      name: consumer1
+      topics: "persistent://public/default/stock-topic-json"
+      subscription:
+        name: training-subscription-json
+        type: key_shared
+      message-type: com.example.pulsar.dto.StockData
+      schema-type: JSON
+      ack-timeout: 10s
+      receive-queue-size: 1000
+#      dead-letter-policy:
+#        max-redelivery-count: 3
+#        retry-letter-topic: "persistent://public/default/stock-topic-partitioned1-retry"
+#        dead-letter-topic: "persistent://public/default/stock-topic-partitioned1-dlq"
+
+# DNS Cache TTL Configuration
+networkaddress:
+  cache:
+    ttl: 60
+    negative:
+      ttl: 10 

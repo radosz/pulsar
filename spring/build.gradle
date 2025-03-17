@@ -10,23 +10,19 @@ sourceCompatibility = '17'
 targetCompatibility = '17'
 
 ext {
-    pulsarVersion = '2.10.0'
+    springPulsarVersion = '1.2.3'
 }
 
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
-    maven { url 'https://repository.apache.org/content/repositories/releases/' }
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation "org.apache.pulsar:pulsar-client:${pulsarVersion}"
-    implementation "org.apache.pulsar:pulsar-client-api:${pulsarVersion}"
-    implementation "org.apache.pulsar:pulsar-client-admin:${pulsarVersion}"
-    implementation "org.apache.pulsar:pulsar-common:${pulsarVersion}"
-    implementation "org.apache.pulsar:pulsar-functions-api:${pulsarVersion}"
+    implementation "org.springframework.pulsar:spring-pulsar:${springPulsarVersion}"
+    implementation "org.springframework.pulsar:spring-pulsar-cache-provider:${springPulsarVersion}"
     implementation 'org.projectlombok:lombok'
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
     
@@ -45,4 +41,8 @@ test {
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+tasks.withType(JavaExec) {
+    jvmArgs = ['--add-opens', 'java.base/sun.net=ALL-UNNAMED']
 } 
