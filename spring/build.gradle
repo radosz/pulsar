@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.3'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+ext {
+    pulsarVersion = '2.10.0'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://repository.apache.org/content/repositories/releases/' }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.apache.pulsar:pulsar-client:${pulsarVersion}"
+    implementation "org.apache.pulsar:pulsar-client-api:${pulsarVersion}"
+    implementation "org.apache.pulsar:pulsar-client-admin:${pulsarVersion}"
+    implementation "org.apache.pulsar:pulsar-common:${pulsarVersion}"
+    implementation "org.apache.pulsar:pulsar-functions-api:${pulsarVersion}"
+    implementation 'org.projectlombok:lombok'
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+    
+    // OpenTelemetry dependencies
+    implementation 'io.opentelemetry:opentelemetry-api:1.32.0'
+    implementation 'io.opentelemetry:opentelemetry-sdk:1.32.0'
+    implementation 'io.opentelemetry:opentelemetry-exporter-logging:1.32.0'
+    
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+} 
